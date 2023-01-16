@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(registry:HKEY_LOCAL_MACHINE\SOFTWARE\Akisystems\akibld@Sources)akibld-con.props" />
+  </ImportGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{303DEC8D-B2BB-495F-8439-AD44E58036A8}</ProjectGuid>
+    <RootNamespace>simplecpp</RootNamespace>
+    <ProjectName>simplecpp</ProjectName>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="simplecpp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="simplecpp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="runastyle.bat" />
+  </ItemGroup>
+</Project>
