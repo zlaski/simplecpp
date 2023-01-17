@@ -1,0 +1,138 @@
+NB: See also https://www.geoffchappell.com/studies/msvc/cl/cl/options/index.htm.
+
+CL /Bz <arguments-ordinarily-passed>
+---------------
+Print entire command line for C1.DLL invocation, including entire include path
+(as a series of -I arguments).
+
+cl -E -nologo -Zc:preprocessor -PD %TMP%\tmp.c /Dfoo /Dbar /Dbaz
+--------------
+Shows all macros defined at outset of compilation.
+
+cl -E -nologo -Zc:preprocessor -PH %TMP%\tmp.c 
+--------------
+Generate a '#pragma file_hash(...)' for %TMP%\tmp.c
+
+cl -E -nologo -Zc:preprocessor -BC %TMP%\tmp.c
+--------------
+???
+
+cl -E -nologo -Zc:preprocessor -BE %TMP%\tmp.c
+--------------
+???
+
+cl -E -nologo -Zc:preprocessor -BK %TMP%\tmp.c
+--------------
+cl : Command line warning D9027 : source file 'C:\Users\ziemo\AppData\Local\Temp\tmp.c' ignored
+
+cl -E -nologo -Zc:preprocessor -BY %TMP%\tmp.c
+--------------
+Detailed info on memory segments and DLL dependencies.
+
+cl -E -nologo -Zc:preprocessor -BZ %TMP%\tmp.c
+--------------
+cl : Command line error D8003 : missing source filename
+
+cl -E -nologo -Zc:preprocessor -Bd %TMP%\tmp.c -Ifoo -Ibar -Dbaz=11
+--------------
+`C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\c1.dll
+-zm0x00007FF67B813D40 -il C:\Users\ziemo\AppData\Local\Temp\_CL_d5aafee9 -typedil
+-f C:\Users\ziemo\AppData\Local\Temp\tmp.c -W 1 -Ze -D_MSC_EXTENSIONS -Zp16 -Ot -Fotmp.obj
+-Fe tmp.exe -pc \:/ -Fdvc140.pdb -D_MSC_VER=1934 -D_MSC_FULL_VER=193431937 -D_MSC_BUILD=0
+-D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GS -E -nologo -Zc:preprocessor -Bd
+-I foo -I bar -Dbaz=11 -clrNoPureCRT -D_MT
+-I C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include
+-I C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\ATLMFC\include
+-I C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include
+-I C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt
+-I C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um'
+
+
+cl -E -nologo -Zc:preprocessor -Bd %TMP%\tmp.c -Ifoo -Ibar -Dbaz=11
+--------------
+all:
+        @cd C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64
+        @set INCLUDE=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include;
+        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\ATLMFC\include;
+        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include;
+        C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt;
+        C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um;
+        C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared;
+        C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt;
+        C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt;
+        C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um
+        @set LIB=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\ATLMFC\lib\x64;
+        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64;
+        C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\lib\um\x64;
+        C:\Program Files (x86)\Windows Kits\10\lib\10.0.22621.0\ucrt\x64;
+        C:\Program Files (x86)\Windows Kits\10\\lib\10.0.22621.0\\um\x64
+        @set LIBPATH=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\ATLMFC\lib\x64;
+        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x64;
+        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\lib\x86\store\references;
+        C:\Program Files (x86)\Windows Kits\10\UnionMetadata\10.0.22621.0;
+        C:\Program Files (x86)\Windows Kits\10\References\10.0.22621.0;
+        C:\Windows\Microsoft.NET\Framework64\v4.0.30319
+        @set CL=
+        @set _CL_=
+        @set LINK=
+        C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\cl.exe
+        -E -nologo -Zc:preprocessor -Be C:\Users\ziemo\AppData\Local\Temp\tmp.c -Ifoo -Ibar -Dbaz=11
+
+cl -E -nologo -Zc:preprocessor -Bd %TMP%\tmp.c -Ifoo -Ibar -Dbaz=11
+--------------
+CIL Version 20220715
+
+cl -E -nologo -Zc:preprocessor -Bk %TMP%\tmp.c -Ifoo -Ibar -Dbaz=11
+--------------
+???
+
+cl -E -nologo -Zc:preprocessor -Bt %TMP%\tmp.c -Ifoo -Ibar -Dbaz=11
+--------------
+???
+
+cl -E -nologo -Zc:preprocessor -Bv %TMP%\tmp.c -Ifoo -Ibar -Dbaz=11
+--------------
+Compiler Passes:
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\cl.exe:
+ Version 19.34.31937.0
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\c1.dll:
+ Version 19.34.31937.0
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\c1xx.dll:
+ Version 19.34.31937.0
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\c2.dll:
+ Version 19.34.31937.0
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\c1xx.dll:
+ Version 19.34.31937.0
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\link.exe:
+ Version 14.34.31937.0
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\mspdb140.dll:
+ Version 14.34.31937.0
+ C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\1033\clui.dll:
+ Version 19.34.31937.0
+
+cl -E -nologo -Zc:preprocessor -Bx %TMP%\tmp.c
+--------------
+cl : Command line error D8003 : missing source filename
+
+cl -E -nologo -Zc:preprocessor -Bz %TMP%\tmp.c
+--------------
+`C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\bin\Hostx64\x64\c1.dll
+-zm0x00007FF67B813D40 -il C:\Users\ziemo\AppData\Local\Temp\_CL_b826fe23 -typedil
+-f C:\Users\ziemo\AppData\Local\Temp\tmp.c -W 1 -Ze -D_MSC_EXTENSIONS -Zp16 -Ot -Fotmp.obj
+-Fe tmp.exe -pc \:/ -Fdvc140.pdb -D_MSC_VER=1934 -D_MSC_FULL_VER=193431937
+-D_MSC_BUILD=0 -D_M_AMD64=100 -ZILP448 -D_M_X64=100 -D_WIN64 -D_WIN32 -GS -E -nologo
+-Zc:preprocessor -I foo -I bar -Dbaz=11 -clrNoPureCRT -D_MT
+-I C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include
+-I C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\ATLMFC\include
+-I C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\VS\include
+-I C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\winrt
+-I C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\cppwinrt
+-I C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um'
+

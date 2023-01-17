@@ -36,4 +36,9 @@
       <Filter>Build Files</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Assorted-Notes.txt">
+      <Filter>Build Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>
